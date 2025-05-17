@@ -51,14 +51,18 @@
     }
 
     .content {
-      padding: 50px 20px;
-      max-width: 800px;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      line-height: 1.8;
-      opacity: 0;
-      transition: opacity 0.5s ease;
+  max-width: 800px;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  margin: 0 auto;
+  height: 100vh;                        /* occupe toute la hauteur de la page */
+  display: flex;
+  align-items: center;                 /* centre verticalement */
+  justify-content: center;            /* centre horizontalement */
+  padding: 0 20px;
+  text-align: justify;
     }
 
     body.scrolled .hero img {
