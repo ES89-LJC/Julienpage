@@ -11,7 +11,7 @@
       box-sizing: border-box;
     }
 
-    body, html {
+    html, body {
       height: 100%;
       font-family: 'Helvetica Neue', sans-serif;
       background-color: #0f0f0f;
@@ -19,9 +19,28 @@
       scroll-behavior: smooth;
     }
 
-    .hero {
+    .title-section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #0f0f0f;
+      transition: opacity 0.5s ease;
+      z-index: 10;
       position: relative;
-      padding: 100px 20px 50px;
+    }
+
+    .title-section h1 {
+      font-size: 4rem;
+      color: black;
+      background-color: white;
+      padding: 0.5em 1em;
+      border-radius: 0.5em;
+      transition: opacity 0.5s ease;
+    }
+
+    .hero {
+      padding: 50px 20px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -37,57 +56,57 @@
       z-index: 1;
     }
 
-    .title {
-      position: absolute;
-      top: 30%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2.5rem;
-      z-index: 2;
-      opacity: 1;
+    .content-section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      opacity: 0;
       transition: opacity 0.5s ease;
-      pointer-events: none;
     }
 
     .content {
-      padding: 50px 20px;
       max-width: 800px;
-      margin: 0 auto;
       font-size: 1.2rem;
       line-height: 1.8;
-      opacity: 0;
-      transition: opacity 0.5s ease;
+      text-align: center;
     }
 
     body.scrolled .hero img {
       filter: blur(0);
     }
 
-    body.scrolled .title {
+    body.scrolled .title-section {
       opacity: 0;
     }
 
-    body.scrolled .content {
+    body.scrolled .content-section {
       opacity: 1;
     }
   </style>
 </head>
 <body>
 
-  <div class="hero">
-    <img src="julien.png" alt="Julien Chris">
-    <div class="title">Julien Chris</div>
+  <div class="title-section">
+    <h1>Julien Chris</h1>
   </div>
 
-  <div class="content">
-    <p>Julien Chris is a French DJ making his move into House and Deep House after years as a generalist. Passionate about these sounds, he has been refining his style to create a unique musical experience.</p>
-    <p>In Paris, he has built a reputation for performing at exclusive private events for elite audiences, delivering sophisticated and immersive sets. As a manager of rising talents like Papa Drag, he also plays a key role in shaping the next generation of artists.</p>
-    <p>Now, he is preparing a major project in Berlin, marking his definitive entry into the House and Deep House scene.</p>
+  <div class="hero">
+    <img src="julien.png" alt="Julien Chris">
+  </div>
+
+  <div class="content-section">
+    <div class="content">
+      <p>Julien Chris is a French DJ making his move into House and Deep House after years as a generalist. Passionate about these sounds, he has been refining his style to create a unique musical experience.</p>
+      <p>In Paris, he has built a reputation for performing at exclusive private events for elite audiences, delivering sophisticated and immersive sets. As a manager of rising talents like Papa Drag, he also plays a key role in shaping the next generation of artists.</p>
+      <p>Now, he is preparing a major project in Berlin, marking his definitive entry into the House and Deep House scene.</p>
+    </div>
   </div>
 
   <script>
-    const hero = document.querySelector('.hero');
-    const threshold = hero.offsetHeight / 2;
+    const titleSection = document.querySelector('.title-section');
+    const threshold = titleSection.offsetHeight / 4;
 
     window.addEventListener('scroll', () => {
       if (window.scrollY > threshold) {
