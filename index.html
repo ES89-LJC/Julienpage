@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Julien Chris</title>
   <style>
     * {
@@ -16,83 +16,81 @@
       font-family: 'Helvetica Neue', sans-serif;
       background-color: #0f0f0f;
       color: white;
-      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     .hero {
       position: relative;
       height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1;
-      pointer-events: none;
+      overflow: hidden;
     }
 
-    .hero-text {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      z-index: 10;
-      max-width: 90%;
-      pointer-events: none;
-    }
-
-    .hero-text h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .hero-text p {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      margin-bottom: 0.8rem;
-    }
-
-    .image-container {
-      position: relative;
-      height: 200vh;
-      z-index: 2;
-    }
-
-    .image-container::before {
-      content: "";
-      position: fixed;
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100vh;
-      background-image: url('julien.png');
-      background-size: cover;
-      background-position: center;
       filter: blur(20px);
-      transform: scale(1.1);
-      z-index: 0;
-      transition: filter 0.3s ease;
-      pointer-events: none;
+      transition: filter 0.5s ease;
+      z-index: 1;
     }
 
-    body.scrolled .image-container::before {
-      filter: blur(0px);
+    .title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      text-align: center;
+      z-index: 2;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .content {
+      padding: 100px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    body.scrolled .hero img {
+      filter: blur(0);
+    }
+
+    body.scrolled .title {
+      opacity: 0;
+    }
+
+    body.scrolled .content {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
 
-  <div class="hero-text">
-    <h1>Julien Chris</h1>
+  <div class="hero">
+    <img src="julien.png" alt="Julien Chris">
+    <div class="title">Julien Chris</div>
+  </div>
+
+  <div class="content">
     <p>Julien Chris is a French DJ making his move into House and Deep House after years as a generalist. Passionate about these sounds, he has been refining his style to create a unique musical experience.</p>
     <p>In Paris, he has built a reputation for performing at exclusive private events for elite audiences, delivering sophisticated and immersive sets. As a manager of rising talents like Papa Drag, he also plays a key role in shaping the next generation of artists.</p>
     <p>Now, he is preparing a major project in Berlin, marking his definitive entry into the House and Deep House scene.</p>
   </div>
 
-  <div class="image-container"></div>
-
   <script>
-    window.addEventListener('scroll', function () {
-      if (window.scrollY > 50) {
+    const hero = document.querySelector('.hero');
+    const threshold = hero.offsetHeight / 4;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > threshold) {
         document.body.classList.add('scrolled');
       } else {
         document.body.classList.remove('scrolled');
